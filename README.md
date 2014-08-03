@@ -12,12 +12,12 @@ To get MeCab and GSL working together on Heroku follow these steps:
 
 2) Add the following config variables to your Heroku app  
 `$ heroku config:set BUILDPACK_URL=https://github.com/TM-Town/heroku-buildpack-mecab-gsl.git`  
-`$ heroku config:set LD_LIBRARY_PATH=/app/vendor/mecab/lib`  
+`$ heroku config:set LD_LIBRARY_PATH=/app/vendor/gsl-1/lib:/app/vendor/mecab/lib`  
 
 3) Push your app to Heroku  
 `$ git push heroku master`  
 
-N.B. This buildpack points to the file `libmecab-heroku.tar.gz` which is currently stored on S3. There is no guarantee that this file will always be available at this location. Thus, if you have trouble getting this buildpack to work, take the `libmecab-heroku.tar.gz` file which is stored in this repo at `mecab/libmecab-heroku.tar.gz` and store it on S3. Make sure it is set to public. Then fork this repo and change line 13 in `lib/language_pack/ruby.rb` to link to the new location of the file on S3.
+N.B. This buildpack points to the file `libmecab-heroku.tar.gz` and the file `gsl-1.15.tgz` which are both currently stored on S3. There is no guarantee that these files will always be available at this location. Thus, if you have trouble getting this buildpack to work, take the `libmecab-heroku.tar.gz` file which is stored in this repo at [binaries/libmecab-heroku.tar.gz](https://github.com/TM-Town/heroku-buildpack-mecab-gsl/tree/master/binaries) and the `gsl-1.15.tgz` file which is stored in this repo at [binaries/gsl-1.15.tgz](https://github.com/TM-Town/heroku-buildpack-mecab-gsl/tree/master/binaries) and store them on S3. Make sure to set the files to public. Then fork this repo and change line 12 and 13 in [lib/language_pack/ruby.rb](https://github.com/TM-Town/heroku-buildpack-mecab-gsl/blob/master/lib/language_pack/ruby.rb) to link to the new locations of the files on S3.
 
 Heroku buildpack: Ruby
 ======================
