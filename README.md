@@ -11,7 +11,7 @@ To get MeCab and GSL working together on Heroku follow these steps:
 `$ bundle install`  
 
 2) Add the following config variables to your Heroku app  
-`$ heroku config:set BUILDPACK_URL=https://github.com/diasks2/heroku-buildpack-mecab.git`  
+`$ heroku config:set BUILDPACK_URL=https://github.com/TM-Town/heroku-buildpack-mecab-gsl.git`  
 `$ heroku config:set LD_LIBRARY_PATH=/app/vendor/mecab/lib`  
 
 3) Push your app to Heroku  
