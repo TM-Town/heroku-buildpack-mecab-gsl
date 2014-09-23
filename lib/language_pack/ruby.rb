@@ -267,7 +267,13 @@ ERROR
         Dir.chdir(build_ruby_path) do
           ruby_vm = "ruby"
           instrument "ruby.fetch_build_ruby" do
-            @fetchers[:buildpack].fetch_untar("#{ruby_version.version.sub(ruby_vm, "#{ruby_vm}-build")}.tgz")
+            if (ruby_version.version.split('.')[0] >= 2 && ruby_version.version.split('.')[1] >= 1 && ruby_version.version.split('.')[2] >= 3) ||
+              (ruby_version.version.split('.')[0] >= 2 && ruby_version.version.split('.')[1] >= 2) ||
+              (ruby_version.version.split('.')[0] >= 3)
+              @fetchers[:buildpack_cedar].fetch_untar("#{ruby_version.version.sub(ruby_vm, "#{ruby_vm}-build")}.tgz")
+            else
+              @fetchers[:buildpack].fetch_untar("#{ruby_version.version.sub(ruby_vm, "#{ruby_vm}-build")}.tgz")
+            end
           end
         end
         error invalid_ruby_version_message unless $?.success?
